@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('server-favicon');
+const favicon = require('serve-favicon');
 const morgan = require('morgan');
 
 
@@ -32,6 +32,7 @@ app.get('/*', (req, res) => {
 });
 
 //Tell the app to listen
+const port = process.env.PORT || 3001;
 app.listen(port, function(){
   console.log(`Express app running on port ${port}`);
 });
