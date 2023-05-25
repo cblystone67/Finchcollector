@@ -1,8 +1,11 @@
 import React from 'react'
-
-function ActorListPage() {
+import { useParams } from 'react-router-dom'
+function ActorListPage({useParams}) {
   return (
-    <div>ActorListPage</div>
+    <div>
+      ActorListPage
+      <p>{movies.actors}</p>
+      </div>
   )
 }
 
