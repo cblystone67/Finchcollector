@@ -14,4 +14,5 @@ def cats_index(request):
 cats = [
   {'name': 'Lolo', 'breed': 'tabby', 'description': 'furry little demon', 'age': 3},
   {'name': 'Sachi', 'breed': 'calico', 'description': 'gentle and loving', 'age': 2},
+  {'name': 'Kali', 'breed': 'calico', 'description': 'gentle and loving', 'age': 6},
 ]
