@@ -29,7 +29,7 @@
     <div class="card-panel teal-text center-align green lighten-5">
       {{finch.species}} has been fed all meals for today
     </div>
-    
+
     {% else %}
     <div class="card-panel red-text center-align red lighten-4">
       {{finch.species}} might be hungry</div>
@@ -50,6 +50,47 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ finch.species }}'s Toys</h3>
+    {% if finch.toys.count %}
+      {% for toy in finch.toys.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="color: {{toy.color}}">{{ toy.color }}</span> {{ toy.name }}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+        <h5>No Toys 😹</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Available Toys</h3>
+    {% if toys.count %}
+      {% for toy in toys.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="color: {{ toy.color }}-text">{{ toy.color }}</span> {{ toy.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_toy' finch.id toy.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn blue">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+        <h5>{{finch.species}} Already Has All The Toys Available</h5>
+    {% endif %}
   </div>
 </div>
 <script>
