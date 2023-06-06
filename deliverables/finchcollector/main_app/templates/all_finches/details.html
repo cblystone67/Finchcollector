@@ -1,6 +1,8 @@
 {% extends 'base.html'%}
 {% block content %}
+
 <h1>Finch Details</h1>
+
 <div class="row">
   <div class="col s6">
     <div class="card">
@@ -29,7 +31,6 @@
     <div class="card-panel teal-text center-align green lighten-5">
       {{finch.species}} has been fed all meals for today
     </div>
-
     {% else %}
     <div class="card-panel red-text center-align red lighten-4">
       {{finch.species}} might be hungry</div>
@@ -63,6 +64,12 @@
             <span class="card-title">
               A <span style="color: {{toy.color}}">{{ toy.color }}</span> {{ toy.name }}
             </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_toy' finch.id toy.id %}" method="Post">
+              {% csrf_token %}
+              <input type='submit' value="Remove" class="btn red">
+            </form>
           </div>
         </div>
       {% endfor %}

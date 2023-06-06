@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+
 
 from datetime import date
 
@@ -16,12 +18,13 @@ class Toy(models.Model):
 
 
 class Finch(models.Model):
-  species = models.CharField(max_length=100)
-  diet = models.CharField(max_length=100)
-  lifespan = models.CharField(max_length=100)
-  size = models.CharField(max_length=100)
+  species = models.CharField(max_length=50)
+  diet = models.CharField(max_length=50)
+  lifespan = models.CharField(max_length=50)
+  size = models.CharField(max_length=50)
   unique_characteristics = models.CharField(max_length=250)
   toys = models.ManyToManyField(Toy)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def fed_for_today(self):
     return self.feeding_set.filter(date=date.today()).count() >= len(Feeding.MEALS)
@@ -30,7 +33,7 @@ class Finch(models.Model):
     return self.species
   
   def get_absolute_url(self):
-    return reverse('details', kwargs={'pk': self.id})
+    return reverse('details', kwargs={'finch_id': self.id})
   
 class Feeding(models.Model):
   MEALS = (
